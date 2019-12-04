@@ -1,4 +1,16 @@
 form{
-    margin-top: 20px;
+    margin-top: 200px;
     text-align: center;
+}
+
+/* button{
+    background-color: blue;
+} */
+
+form mat-form-field{
+    width: 40%;
+}
+
+form button{
+    width: 100px;
 }

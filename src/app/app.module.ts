@@ -8,15 +8,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { TopNavComponent } from './shared/top-nav/top-nav.component';
 import { MatInputModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatToolbarModule,
+  MatButtonModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TopNavComponent
+    TopNavComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,9 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
