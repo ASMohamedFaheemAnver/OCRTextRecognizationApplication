@@ -1,0 +1,15 @@
+.file{
+  width:400px;
+  background-color: azure;
+  align-content: center;
+  margin: 20px;
+  margin-left: 330px;
+}
+.input-group-append{
+  margin-left: 100px;
+}
+.card{
+  margin: 20px;
+  margin-left: 330px;
+}
+
