@@ -1,15 +1,13 @@
-.file{
-  width:400px;
-  background-color: azure;
-  align-content: center;
-  margin: 20px;
-  margin-left: 330px;
-}
-.input-group-append{
-  margin-left: 100px;
-}
-.card{
-  margin: 20px;
-  margin-left: 330px;
+.example-card {
+    max-width: 25%;
+    margin: 100px auto;
 }
 
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+button {
+    width: 100%;
+}
