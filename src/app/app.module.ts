@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { CardResultsComponent } from './pages/card-results/card-results.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CardResultsComponent } from './pages/card-results/card-results.componen
     TopNavComponent,
     HomeComponent,
     PageNotFoundComponent,
-    CardResultsComponent
+    CardResultsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
