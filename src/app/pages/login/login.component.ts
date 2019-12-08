@@ -15,9 +15,9 @@ export class LoginComponent {
 
   onLoginSubmit(userData : FormData){
     // console.log(userData['email']);
-    if(this.userName==userData['email']&&this.password==userData['password']){
+    //if(this.userName==userData['email']&&this.password==userData['password']){
       this.router.navigateByUrl('home-page');
-    }
+    //}
   }
 
 }
