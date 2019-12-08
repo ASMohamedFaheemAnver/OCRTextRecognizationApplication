@@ -21,7 +21,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'cart-results',
+    path: 'card-results',
     component: CardResultsComponent
   },
   {
