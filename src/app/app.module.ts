@@ -12,12 +12,15 @@ import {
   MatFormFieldModule,
   MatToolbarModule,
   MatButtonModule,
-  MatCardModule
+  MatCardModule,
+  MatMenuModule,
+  MatGridListModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { CardResultsComponent } from './pages/card-results/card-results.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { CardResultsComponent } from './pages/card-results/card-results.componen
     TopNavComponent,
     HomeComponent,
     PageNotFoundComponent,
-    CardResultsComponent
+    CardResultsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import { CardResultsComponent } from './pages/card-results/card-results.componen
     FormsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatMenuModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
