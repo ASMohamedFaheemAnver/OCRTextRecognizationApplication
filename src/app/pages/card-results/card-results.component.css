@@ -1,5 +1,7 @@
 .example-card {
-    max-width: 25%;
+    width: 20%;
+    float: left;
+    margin: 40px 40px;
 }
 
 .example-header-image {

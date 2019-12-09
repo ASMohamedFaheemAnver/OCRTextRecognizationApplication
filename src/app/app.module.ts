@@ -13,7 +13,8 @@ import {
   MatToolbarModule,
   MatButtonModule,
   MatCardModule,
-  MatMenuModule
+  MatMenuModule,
+  MatGridListModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
@@ -41,7 +42,8 @@ import { RegisterComponent } from './pages/register/register.component';
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
