@@ -3,7 +3,6 @@ form {
     text-align: center;
 }
 
-
 /* button{
     background-color: blue;
 } */
@@ -14,4 +13,8 @@ form mat-form-field {
 
 form button {
     width: 100px;
+}
+
+form h2{
+    color: blue;
 }
