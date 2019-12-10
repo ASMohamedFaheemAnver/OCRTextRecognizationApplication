@@ -14,3 +14,6 @@
     <button mat-raised-button color="primary">LOGIN</button>
     <!-- <br/>{{userFormData.value | json}} -->
 </form>
+<div *ngFor="let user of userData">
+    {{user | json}}
+</div>
