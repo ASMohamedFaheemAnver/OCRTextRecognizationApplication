@@ -11,9 +11,11 @@
         <input name="password" type="password" matInput placeholder="Password" ngModel>
     </mat-form-field>
     <br />
+    <small class="text-danger" [class.d-none]="isUserExist">USERNAME OR PASSWORD IS INCORRECT!</small>
+    <br />
     <button mat-raised-button color="primary">LOGIN</button>
     <!-- <br/>{{userFormData.value | json}} -->
 </form>
-<div *ngFor="let user of userData">
-    <!-- {{user | json}} -->
-</div>
+<!-- <div *ngFor="let user of userData">
+    {{user | json}}
+</div> -->

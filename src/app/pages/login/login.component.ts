@@ -14,6 +14,8 @@ export class LoginComponent {
   // url = 'http://localhost:8080/users/';
   userData : any = []
 
+  isUserExist = true;
+
   onLoginSubmit(userFormData : FormData){
     // this.http.get(this.url).subscribe(res=>{
     //   console.log(res);
@@ -29,7 +31,11 @@ export class LoginComponent {
       this.userData.forEach(user => {
         if(userFormData['email']==user['username']&&
           userFormData['password']==user['password']){
-            this.router.navigateByUrl('home-page');   
+            console.log("SUCCESSED");
+            this.router.navigateByUrl('home-page');
+            this.isUserExist = true; 
+        }else{
+          this.isUserExist = false;
         }
       });
     });
