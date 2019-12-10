@@ -13,6 +13,7 @@ export class RegisterComponent {
     password: ''
   }
   isUserExist = false;
+  isSuccessed = false;
   constructor(private http: HttpClient) { }
 
   onLoginSubmit(userData) {
@@ -20,8 +21,13 @@ export class RegisterComponent {
     this.user.password = userData['password'];
     if(this.user.username&&this.user.password){
       this.http.post(this.url, this.user).subscribe(
-        ()=>{this.isUserExist = false},
-        error=>{this.isUserExist = true}
+        ()=>{this.isUserExist = false;
+          this.isSuccessed = true;
+        },
+        error=>{
+          this.isUserExist = true;
+          this.isSuccessed = false;
+        }
       );
     }
   }
