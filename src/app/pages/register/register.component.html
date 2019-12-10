@@ -11,6 +11,8 @@
         <input name="password" type="password" matInput placeholder="Password" ngModel>
     </mat-form-field>
     <br />
+    <small [class.d-none]="!isUserExist" class="text-danger">ALREADY A USER EXIST!</small>
+    <br />
     <button mat-raised-button color="primary">REGISTER</button>
     <!-- <br/>{{userFormData.value | json}} -->
 </form>

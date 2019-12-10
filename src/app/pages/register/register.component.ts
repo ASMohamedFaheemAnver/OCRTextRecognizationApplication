@@ -9,15 +9,21 @@ import { HttpClient } from '@angular/common/http';
 export class RegisterComponent {
   url = 'http://localhost:8080/users';
   user = {
-    username: 'jstrfaheem065@gmail.com',
-    password: '*74362@?'
+    username: '',
+    password: ''
   }
+  isUserExist = false;
   constructor(private http: HttpClient) { }
 
   onLoginSubmit(userData) {
     this.user.username = userData['email'];
     this.user.password = userData['password'];
-    this.http.post(this.url, this.user).subscribe();
+    if(this.user.username&&this.user.password){
+      this.http.post(this.url, this.user).subscribe(
+        ()=>{this.isUserExist = false},
+        error=>{this.isUserExist = true}
+      );
+    }
   }
 
 }
