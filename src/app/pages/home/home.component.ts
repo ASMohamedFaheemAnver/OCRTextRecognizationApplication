@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     reader.onload= ((res)=>{
       console.log(res);
       this.imageUrl = reader.result;
-      console.log(this.imageUrl);
+      // console.log(this.imageUrl);
       const worker = createWorker({
         //logger: m => console.log(m)
       });
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   onUpload(){
     const uploaddata = new FormData();
     uploaddata.append('myFile', this.selectedFile, this.selectedFile.name);
-    this.http.post('http://localhost:8080/images', uploaddata).subscribe(
+    this.http.post('http://localhost:8080/users/jstrfaheem065@gmail.com/images', uploaddata).subscribe(
       (res)=>{
         console.log(res);
       }

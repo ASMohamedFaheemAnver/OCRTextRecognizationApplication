@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -13,14 +13,7 @@ export class CardResultsComponent implements OnInit {
   constructor(private http : HttpClient) { 
     
     http.get('http://localhost:8080/images/1').subscribe(
-      res=>{
-        // this.createImageFromBlob(res);
-        let blob = new Blob([res['picture'], 'image/png']);
-        let objectURL = URL.createObjectURL(blob);
-        this.imageToShow = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        
-      }
-    );
+    )
   }
 
 //   createImageFromBlob(image: Blob) {

@@ -7,9 +7,11 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   constructor(private http : HttpClient) { }
-  url = 'http://localhost:8080/users';
+  url = 'http://localhost:3000/api/users';
 
-  getUsers(){
-    return this.http.get(this.url);
+  getUsers(userEmail, userPassword){
+    let url = this.url + '?user_name=' + userEmail + '&password=' + userPassword;
+    // console.log(url);
+    return this.http.get(url);
   }
 }

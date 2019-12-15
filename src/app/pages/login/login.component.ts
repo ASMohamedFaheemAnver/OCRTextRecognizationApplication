@@ -26,18 +26,14 @@ export class LoginComponent {
     //}
 
 
-    this.httpService.getUsers().subscribe(userData=>{
-      this.userData = userData;
-      this.userData.forEach(user => {
-        if(userFormData['email']==user['username']&&
-          userFormData['password']==user['password']){
-            console.log("SUCCESSED");
-            this.router.navigateByUrl('home-page');
-            this.isUserExist = true; 
-        }else{
-          this.isUserExist = false;
-        }
-      });
+    this.httpService.getUsers(userFormData['email'], userFormData['password']).subscribe(res=>{
+      if(res){
+        this.router.navigateByUrl('home-page');
+      }
+    },
+    err=>{
+      this.isUserExist = false;
+      // alert('USER NAME OR PASSWORD IS INCORRECT!');
     });
   }
 
