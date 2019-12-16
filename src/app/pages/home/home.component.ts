@@ -14,11 +14,14 @@ export class HomeComponent implements OnInit {
   selectedFile : File
 
   imageText = '';
+  isUploading = false;
+
   ngOnInit() {
   }
   imageUrl : any = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx5c-8qgZT0BceT9dz8NRrZlwe3bAOW98CK5uCDg6O2SjDUOum&s";
   
   onFileChanged(event){
+    this.isUploading = true;
     const reader = new FileReader();
     console.log(event.target.files[0]);
     reader.readAsDataURL(event.target.files[0]);
@@ -39,6 +42,7 @@ export class HomeComponent implements OnInit {
         const { data: { text } } = await worker.recognize(this.imageUrl);
         this.imageText = text;
         // console.log(text);
+        this.isUploading = false;
         await worker.terminate();
       })();
     });
@@ -48,12 +52,14 @@ export class HomeComponent implements OnInit {
   }
 
   onUpload(){
+    this.isUploading = true;
     const uploaddata = new FormData();
     uploaddata.append('image', this.selectedFile, this.selectedFile.name);
     uploaddata.append('result', this.imageText);
     this.http.post('http://localhost:3000/api/results', uploaddata).subscribe(
       (res)=>{
         console.log(res);
+        this.isUploading = false;
       }
     );
   }

@@ -1,10 +1,13 @@
 <mat-card class="example-card">
     <img mat-card-image [src]="imageUrl" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+        <p>{{imageText}}</p>
+    </mat-card-content>
     <mat-card-actions>
         <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
         <button mat-raised-button (click)="fileInput.click()">SELECT YOUR PICTURE</button>
         <br><br>
-        <button mat-raised-button color="primary" (click)="onUpload()">GET TEXT</button>
+        <button mat-raised-button color="primary" (click)="onUpload()">UPLOAD DATA!</button>
     </mat-card-actions>
+    <mat-progress-bar *ngIf="isUploading" mode="indeterminate"></mat-progress-bar>
 </mat-card>
-<p>{{imageText | json}}</p>

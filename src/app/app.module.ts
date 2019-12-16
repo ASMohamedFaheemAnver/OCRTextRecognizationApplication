@@ -14,7 +14,9 @@ import {
   MatButtonModule,
   MatCardModule,
   MatMenuModule,
-  MatGridListModule
+  MatGridListModule,
+  MatExpansionModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
@@ -46,6 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatMenuModule,
     MatGridListModule,
     HttpClientModule,
+    MatExpansionModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
