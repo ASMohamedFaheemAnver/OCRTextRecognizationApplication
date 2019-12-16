@@ -20,14 +20,15 @@ export class HomeComponent implements OnInit {
   
   onFileChanged(event){
     const reader = new FileReader();
+    console.log(event.target.files[0]);
     reader.readAsDataURL(event.target.files[0]);
     
-    reader.onload= ((res)=>{
-      console.log(res);
+    reader.onload= (()=>{
+      // console.log(res);
       this.imageUrl = reader.result;
       // console.log(this.imageUrl);
       const worker = createWorker({
-        //logger: m => console.log(m)
+        logger: m => console.log(m)
       });
   
       // Run this function as soon as this function defined
@@ -37,7 +38,7 @@ export class HomeComponent implements OnInit {
         await worker.initialize('eng');
         const { data: { text } } = await worker.recognize(this.imageUrl);
         this.imageText = text;
-        console.log(text);
+        // console.log(text);
         await worker.terminate();
       })();
     });
@@ -48,8 +49,9 @@ export class HomeComponent implements OnInit {
 
   onUpload(){
     const uploaddata = new FormData();
-    uploaddata.append('myFile', this.selectedFile, this.selectedFile.name);
-    this.http.post('http://localhost:8080/users/jstrfaheem065@gmail.com/images', uploaddata).subscribe(
+    uploaddata.append('image', this.selectedFile, this.selectedFile.name);
+    uploaddata.append('result', this.imageText);
+    this.http.post('http://localhost:3000/api/results', uploaddata).subscribe(
       (res)=>{
         console.log(res);
       }

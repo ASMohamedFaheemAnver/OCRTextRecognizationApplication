@@ -8,11 +8,12 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./card-results.component.css']
 })
 export class CardResultsComponent implements OnInit {
-  imageToShow : any
-  sanitizer : DomSanitizer
+  results : any = []
   constructor(private http : HttpClient) { 
     
-    http.get('http://localhost:8080/images/1').subscribe(
+    http.get('http://localhost:3000/api/results').subscribe(res=>{
+      this.results = res;
+    }
     )
   }
 
