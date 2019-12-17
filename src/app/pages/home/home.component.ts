@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { createWorker } from 'tesseract.js';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -17,42 +16,35 @@ export class HomeComponent implements OnInit {
   isUploading = false;
   isInvalid = false;
   isFinished = false;
+  isButtonDisabled = true;
 
   ngOnInit() {
   }
-  imageUrl: any = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx5c-8qgZT0BceT9dz8NRrZlwe3bAOW98CK5uCDg6O2SjDUOum&s";
+  temp = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx5c-8qgZT0BceT9dz8NRrZlwe3bAOW98CK5uCDg6O2SjDUOum&s';
+  imageUrl: any = this.temp;
 
   onFileChanged(event) {
     this.isUploading = true;
     this.isFinished = false;
     this.isInvalid = false;
+    this.isButtonDisabled = true;
+    this.imageText = '';
+    this.imageUrl = this.temp;
+
     const reader = new FileReader();
-    // console.log(event.target.files[0]);
-    reader.readAsDataURL(event.target.files[0]);
+    this.selectedFile = event.target.files[0];
+    reader.readAsDataURL(this.selectedFile);
 
     reader.onload = (() => {
-      // console.log(res);
       this.imageUrl = reader.result;
-      // console.log(this.imageUrl);
-      const worker = createWorker({
-        logger: m => console.log(m)
-      });
-
-      // Run this function as soon as this function defined
-      (async () => {
-        await worker.load();
-        await worker.loadLanguage('eng');
-        await worker.initialize('eng');
-        const { data: { text } } = await worker.recognize(this.imageUrl);
-        this.imageText = text;
-        // console.log(text);
+      let imageData = new FormData();
+      imageData.append('image', this.selectedFile);
+      this.http.post('http://localhost:3000/api/result', imageData).subscribe(res=>{
+        this.imageText = res['image_text'],
         this.isUploading = false;
-        await worker.terminate();
-      })();
+        this.isButtonDisabled = false;
+      });
     });
-    // const uploaddata = new FormData();
-    this.selectedFile = event.target.files[0];
-    // console.log(this.selectedFile);
   }
 
   onUpload() {

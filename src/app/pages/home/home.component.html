@@ -7,7 +7,7 @@
         <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
         <button mat-raised-button (click)="fileInput.click()">SELECT YOUR PICTURE</button>
         <br><br>
-        <button mat-raised-button color="primary" (click)="onUpload()">UPLOAD DATA!</button>
+        <button [disabled]="isButtonDisabled" mat-raised-button color="primary" (click)="onUpload()">UPLOAD DATA!</button>
     </mat-card-actions>
     <p *ngIf="isInvalid" style="text-align: center; color: red;">*PLEASE SELECT A PICTURE FIRST!</p>
     <p *ngIf="isFinished" style="text-align: center; color: green;">*UPLOADING IMAGE FINISHED!</p>
