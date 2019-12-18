@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public router: ActivatedRoute, private routerTwo : Router) { 
+    
+  }
 
   selectedFile: File
 
@@ -17,8 +20,19 @@ export class HomeComponent implements OnInit {
   isInvalid = false;
   isFinished = false;
   isButtonDisabled = true;
+  userId = '';
 
   ngOnInit() {
+    this.router.paramMap.subscribe((paramMap: ParamMap)=>{
+      if(paramMap.has('userId')){
+        this.userId = paramMap.get('userId');
+        // console.log(this.userId);
+        this.http.get('http://localhost:3000/api/user_id?user_id=' + this.userId).subscribe(res=>{
+        }, err=>{
+          this.routerTwo.navigateByUrl('login-page');
+        });
+      }
+    });
   }
   temp = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx5c-8qgZT0BceT9dz8NRrZlwe3bAOW98CK5uCDg6O2SjDUOum&s';
   imageUrl: any = this.temp;
@@ -54,6 +68,7 @@ export class HomeComponent implements OnInit {
       const uploaddata = new FormData();
       uploaddata.append('image', this.selectedFile, this.selectedFile.name);
       uploaddata.append('result', this.imageText);
+      uploaddata.append('user_id', this.userId);
       this.http.post('http://localhost:3000/api/results', uploaddata).subscribe(
         (res) => {
           console.log(res);

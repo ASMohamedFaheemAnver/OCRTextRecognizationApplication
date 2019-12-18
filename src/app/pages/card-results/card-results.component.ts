@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-card-results',
@@ -9,10 +10,22 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class CardResultsComponent implements OnInit {
   results : any = []
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private router: ActivatedRoute, private routerTwo: Router) { }
+
+  userId = '';
 
   ngOnInit() {
-    this.http.get('http://localhost:3000/api/results').subscribe(res=>{
+    this.router.paramMap.subscribe((paramMap: ParamMap)=>{
+      if(paramMap.has('userId')){
+        this.userId = paramMap.get('userId');
+        console.log(this.userId);
+        this.http.get('http://localhost:3000/api/user_id?user_id=' + this.userId).subscribe(res=>{
+        }, err=>{
+          this.routerTwo.navigateByUrl('login-page');
+        });
+      }
+    });
+    this.http.get('http://localhost:3000/api/results?user_id=' + this.userId).subscribe(res=>{
       this.results = res;
     });
   }

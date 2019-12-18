@@ -8,7 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TopNavComponent implements OnInit {
 
   constructor() { }
-  @Input() isIn = false;
+  @Input() isIn;
+  @Input() userId;
   ngOnInit() {
   }
 

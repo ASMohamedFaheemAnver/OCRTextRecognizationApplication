@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent{
   url = 'http://localhost:3000/api/users';
   user = {
     user_name: '',
@@ -15,12 +16,15 @@ export class RegisterComponent {
   }
   isUserExist = false;
   isSuccessed = false;
-  constructor(private http: HttpClient, private locationStrategy: LocationStrategy) { 
+
+  constructor(private http: HttpClient, private locationStrategy: LocationStrategy, private router : ActivatedRoute, private routerTwo: Router) { 
     history.pushState(null, null, location.href);
         this.locationStrategy.onPopState(() => {
           history.pushState(null, null, location.href);
         })
   }
+
+  
 
   onLoginSubmit(userData) {
     this.user.user_name = userData['email'];

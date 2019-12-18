@@ -22,11 +22,11 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'home-page',
+    path: 'home-page/:userId',
     component: HomeComponent
   },
   {
-    path: 'card-results',
+    path: 'card-results/:userId',
     component: CardResultsComponent
   },
   {

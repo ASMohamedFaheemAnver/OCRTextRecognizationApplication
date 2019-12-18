@@ -34,7 +34,7 @@ export class LoginComponent {
 
     this.httpService.getUsers(userFormData['email'], userFormData['password']).subscribe(res=>{
       if(res){
-        this.router.navigateByUrl('home-page');
+        this.router.navigateByUrl('home-page/'+res['id']);
       }
     },
     err=>{
