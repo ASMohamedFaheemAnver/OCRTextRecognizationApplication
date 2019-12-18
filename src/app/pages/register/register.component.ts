@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,12 @@ export class RegisterComponent {
   }
   isUserExist = false;
   isSuccessed = false;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private locationStrategy: LocationStrategy) { 
+    history.pushState(null, null, location.href);
+        this.locationStrategy.onPopState(() => {
+          history.pushState(null, null, location.href);
+        })
+  }
 
   onLoginSubmit(userData) {
     this.user.user_name = userData['email'];

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 // import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/user.service';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,12 @@ import { UserService } from 'src/app/user.service';
 })
 export class LoginComponent {
 
-  constructor(private router : Router, private httpService : UserService){}
+  constructor(private router : Router, private httpService : UserService, private locationStrategy: LocationStrategy){
+    history.pushState(null, null, location.href);
+        this.locationStrategy.onPopState(() => {
+          history.pushState(null, null, location.href);
+        })
+  }
   // url = 'http://localhost:8080/users/';
   userData : any = []
 

@@ -1,9 +1,10 @@
 <mat-toolbar>
     <h1>OCR TEXT RECOGNITION APPLICATION!</h1>
-    <div *ngIf="isIn">
-        <a href="home-page">HOME</a>
-        <a href="card-results">VIEW RESULTS</a>
+    <div>
+        <a *ngIf="isIn" href="home-page">HOME</a>
+        <a *ngIf="isIn" href="card-results">VIEW RESULTS</a>
         <a href="user-register">REGISTER</a>
-        <a href="login-page">LOGOUT</a>
+        <a *ngIf="isIn" href="login-page">LOGOUT</a>
+        <a *ngIf="!isIn" href="login-page">LOGIN</a>
     </div>
 </mat-toolbar>
