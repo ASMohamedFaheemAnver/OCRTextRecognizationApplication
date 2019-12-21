@@ -71,7 +71,6 @@ export class HomeComponent implements OnInit {
       uploaddata.append('user_id', this.userId);
       this.http.post('http://localhost:3000/api/results', uploaddata).subscribe(
         (res) => {
-          console.log(res);
           this.isUploading = false;
           this.isFinished = true;
         }
