@@ -30,7 +30,7 @@ export class UserService {
         const expiresIn = res.expiresIn;
         const now = new Date();
         const expirationDate = new Date(now.getTime() + (expiresIn * 1000));
-        this.saveAuthData(res, expirationDate);
+        this.saveAuthData(res.token, expirationDate);
         this.router.navigateByUrl('home-page/' + this.userId);
       }
     });
@@ -40,13 +40,13 @@ export class UserService {
     return this.isUserLogedIn;
   }
 
-  private saveAuthData(res: any, expirationDate: Date) {
-    localStorage.setItem('res', res);
+  private saveAuthData(token: string, expirationDate: Date) {
+    localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
   }
 
   private clearAuthData() {
-    localStorage.removeItem('res');
+    localStorage.removeItem('token');
     localStorage.removeItem('expiration');
   }
 
@@ -67,20 +67,20 @@ export class UserService {
       const now = new Date();
       const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
       if (expiresIn > 0) {
-        this.token = authInformation.res['token'];
+        this.token = authInformation.token;
         this.isUserLogedIn = true;
       }
     }
   }
 
   private getAuthData() {
-    const res = localStorage.getItem('res');
+    const token = localStorage.getItem('token');
     const expirationDate = localStorage.getItem('expiration');
-    if (!res || !expirationDate) {
+    if (!token || !expirationDate) {
       return;
     }
     return {
-      res: res,
+      token: token,
       expirationDate: new Date(expirationDate)
     }
   }
@@ -91,5 +91,9 @@ export class UserService {
     this.userId = null;
     this.clearAuthData();
     this.router.navigateByUrl('/');
+  }
+
+  getToken(){
+    return this.token;
   }
 }

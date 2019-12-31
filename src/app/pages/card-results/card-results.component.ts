@@ -41,7 +41,6 @@ export class CardResultsComponent implements OnInit {
           // console.log(result);
           return !result._id.includes(id);
         });
-        console.log(this.results);
       }
     });
   }
