@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { CardResultsComponent } from './pages/card-results/card-results.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AuthGuard } from './pages/auth.guard';
 
 
 const routes: Routes = [
@@ -23,11 +24,13 @@ const routes: Routes = [
   },
   {
     path: 'home-page/:userId',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'card-results/:userId',
-    component: CardResultsComponent
+    component: CardResultsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
@@ -37,6 +40,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

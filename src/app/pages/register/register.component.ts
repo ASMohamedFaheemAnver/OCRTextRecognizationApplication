@@ -17,11 +17,8 @@ export class RegisterComponent{
   isUserExist = false;
   isSuccessed = false;
 
-  constructor(private http: HttpClient, private locationStrategy: LocationStrategy, private router : ActivatedRoute, private routerTwo: Router) { 
-    history.pushState(null, null, location.href);
-        this.locationStrategy.onPopState(() => {
-          history.pushState(null, null, location.href);
-        })
+  constructor(private http: HttpClient) { 
+    
   }
 
   

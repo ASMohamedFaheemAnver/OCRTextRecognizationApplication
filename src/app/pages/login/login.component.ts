@@ -1,21 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/user.service';
-import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+  ngOnInit(): void {
+    this.httpService.logOutUser();
+  }
 
-  constructor(private router : Router, private httpService : UserService, private locationStrategy: LocationStrategy){
-    history.pushState(null, null, location.href);
-        this.locationStrategy.onPopState(() => {
-          history.pushState(null, null, location.href);
-        })
+  constructor(private httpService : UserService){
+    
   }
   // url = 'http://localhost:8080/users/';
   userData : any = []
@@ -32,15 +31,18 @@ export class LoginComponent {
     //}
 
 
-    this.httpService.getUsers(userFormData['email'], userFormData['password']).subscribe(res=>{
-      if(res){
-        this.router.navigateByUrl('home-page/'+res['id']);
-      }
-    },
-    err=>{
-      this.isUserExist = false;
-      // alert('USER NAME OR PASSWORD IS INCORRECT!');
-    });
+    this.httpService.getUsers(userFormData['email'], userFormData['password']);
+    
+    // .subscribe(res=>{
+    //   if(res){
+    //     // console.log(res);
+    //     this.router.navigateByUrl('home-page/'+res['id']);
+    //   }
+    // },
+    // err=>{
+    //   this.isUserExist = false;
+    //   // alert('USER NAME OR PASSWORD IS INCORRECT!');
+    // });
   }
 
 }

@@ -3,7 +3,7 @@
     <div>
         <a *ngIf="isIn" href="{{'home-page/'+userId}}">HOME</a>
         <a *ngIf="isIn" href="{{'card-results/'+userId}}">VIEW RESULTS</a>
-        <a href="user-register">REGISTER</a>
+        <a *ngIf="!isIn" href="user-register">REGISTER</a>
         <a *ngIf="isIn" href="login-page">LOGOUT</a>
         <a *ngIf="!isIn" href="login-page">LOGIN</a>
     </div>
