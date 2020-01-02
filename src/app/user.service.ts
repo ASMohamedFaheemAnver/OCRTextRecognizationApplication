@@ -96,4 +96,8 @@ export class UserService {
   getToken(){
     return this.token;
   }
+
+  registerUser(user: any){
+    return this.http.post(this.url, user);
+  }
 }
