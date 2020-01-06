@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient, public router: ActivatedRoute, private routerTwo : Router) { 
+  constructor(private userService: UserService, public router: ActivatedRoute, private routerTwo : Router) { 
     
   }
 
@@ -27,10 +28,13 @@ export class HomeComponent implements OnInit {
       if(paramMap.has('userId')){
         this.userId = paramMap.get('userId');
         // console.log(this.userId);
-        this.http.get('http://localhost:3000/api/user_id?user_id=' + this.userId).subscribe(res=>{
-        }, err=>{
+        // this.http.get('http://localhost:3000/api/user_id?user_id=' + this.userId).subscribe(res=>{
+        // }, err=>{
+        //   this.routerTwo.navigateByUrl('login-page');
+        // });
+        this.userService.getUserById(this.userId).subscribe(_=>{}, err=>{
           this.routerTwo.navigateByUrl('login-page');
-        });
+        })
       }
     });
   }
@@ -53,7 +57,7 @@ export class HomeComponent implements OnInit {
       this.imageUrl = reader.result;
       let imageData = new FormData();
       imageData.append('image', this.selectedFile);
-      this.http.post('http://localhost:3000/api/result', imageData).subscribe(res=>{
+      this.userService.getResult(imageData).subscribe(res=>{
         this.imageText = res['image_text'],
         this.isUploading = false;
         this.isButtonDisabled = false;
@@ -69,7 +73,7 @@ export class HomeComponent implements OnInit {
       uploaddata.append('image', this.selectedFile, this.selectedFile.name);
       uploaddata.append('result', this.imageText);
       uploaddata.append('user_id', this.userId);
-      this.http.post('http://localhost:3000/api/results', uploaddata).subscribe(
+      this.userService.uploadResult(uploaddata).subscribe(
         (res) => {
           this.isUploading = false;
           this.isFinished = true;

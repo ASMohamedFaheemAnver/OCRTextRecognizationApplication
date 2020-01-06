@@ -19,8 +19,6 @@ export class RegisterComponent {
 
   }
 
-
-
   onRegisterSubmit(userData) {
     this.user.user_name = userData['email'];
     this.user.password = userData['password'];

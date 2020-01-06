@@ -13,13 +13,14 @@ export class UserService {
   url = 'http://localhost:3000/api/users';
   url2 = 'http://localhost:3000/api/user_id';
   url3 = 'http://localhost:3000/api/results/';
+  url4 = 'http://localhost:3000/api/result/'
 
 
   private token: string;
   private userId: string;
   private isUserLogedIn: boolean = false;
 
-  getUsers(userEmail, userPassword) {
+  loginUser(userEmail, userPassword) {
     let url = this.url + '?user_name=' + userEmail + '&password=' + userPassword;
     // console.log(url);
     this.http.get<{ token: string, expiresIn: number, id: string }>(url).subscribe(res => {
@@ -33,6 +34,8 @@ export class UserService {
         this.saveAuthData(res.token, expirationDate);
         this.router.navigateByUrl('home-page/' + this.userId);
       }
+    }, _=>{
+      alert("USERNAME OR PASSWORD IS INCORRECT!");
     });
   }
 
@@ -99,5 +102,17 @@ export class UserService {
 
   registerUser(user: any){
     return this.http.post(this.url, user);
+  }
+
+  getResult(imageData: FormData){
+    return this.http.post(this.url4, imageData);
+  }
+
+  uploadResult(uploaddata: FormData){
+    return this.http.post('http://localhost:3000/api/results', uploaddata);
+  }
+
+  getResultById(user_id: string){
+    return this.http.get('http://localhost:3000/api/results?user_id=' + user_id);
   }
 }

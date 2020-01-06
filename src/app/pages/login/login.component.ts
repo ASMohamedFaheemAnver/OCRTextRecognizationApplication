@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit{
     //}
 
 
-    this.httpService.getUsers(userFormData['email'], userFormData['password']);
+    this.httpService.loginUser(userFormData['email'], userFormData['password']);
     
     // .subscribe(res=>{
     //   if(res){
